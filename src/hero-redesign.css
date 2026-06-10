@@ -155,7 +155,7 @@
 .custom-avatar-img {
   width: 100%;
   height: auto;
-  max-height: 80vh; 
+  max-height: 85vh; 
   object-fit: contain;
   object-position: bottom; 
   background-color: transparent;
@@ -163,7 +163,7 @@
   position: relative;
   z-index: 2;
   filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4)); 
-  transform: scale(0.8) translateY(100px); /* Further scaled down slightly and moved down significantly */
+  transform: scale(1.15) translateY(-10px); /* Increased size and moved up */
   transform-origin: bottom center;
 }
 
