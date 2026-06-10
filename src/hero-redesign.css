@@ -19,7 +19,7 @@
   align-items: stretch; /* Allow children to take full height */
   justify-content: center;
   display: flex;
-  min-height: auto !important; /* Override 100vh from .hero */
+  min-height: 85vh !important; /* Ensure enough height so the head is not cut off */
 }
 
 .custom-hero .hero-grid {
@@ -163,7 +163,7 @@
   position: relative;
   z-index: 2;
   filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4)); 
-  transform: scale(1.15) translateY(-10px); /* Increased size and moved up */
+  transform: scale(1.1) translateY(0); /* Removed negative translateY so bottom stays glued to container */
   transform-origin: bottom center;
 }
 
