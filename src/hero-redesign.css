@@ -15,11 +15,11 @@
   background-color: #121e31; /* dark blue */
   padding: 120px 0 0 0; /* Set precise top padding */
   position: relative;
-  overflow: hidden;
+  overflow: visible !important; /* Changed from hidden to visible so the scaled image head doesn't get clipped */
   align-items: stretch; /* Allow children to take full height */
   justify-content: center;
   display: flex;
-  min-height: 85vh !important; /* Ensure enough height so the head is not cut off */
+  min-height: auto !important; /* Reverted back to the original short height */
 }
 
 .custom-hero .hero-grid {
@@ -138,7 +138,7 @@
 
 .custom-avatar-wrapper {
   width: 100%;
-  max-width: 650px; /* Increased to allow a significantly larger photo */
+  max-width: 650px; 
   position: relative;
   z-index: 5;
   background: transparent;
@@ -155,7 +155,7 @@
 .custom-avatar-img {
   width: 100%;
   height: auto;
-  max-height: 85vh; 
+  max-height: 100%; /* Force image to never exceed the container's physical height */
   object-fit: contain;
   object-position: bottom; 
   background-color: transparent;
@@ -163,7 +163,7 @@
   position: relative;
   z-index: 2;
   filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4)); 
-  transform: scale(1.1) translateY(0); /* Removed negative translateY so bottom stays glued to container */
+  transform: scale(1.15) translateY(0); /* Maintain scale and bottom alignment */
   transform-origin: bottom center;
 }
 
