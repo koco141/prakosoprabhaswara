@@ -163,7 +163,7 @@
   position: relative;
   z-index: 2;
   filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4)); 
-  transform: scale(2.8) translateY(15px) !important; /* Scaled up even more */
+  transform: scale(3.0) translateY(18px) !important; /* Scaled up a bit more and adjusted translateY */
   transform-origin: bottom center;
 }
 
@@ -173,11 +173,11 @@
 
 .deco-circle-bg {
   position: absolute;
-  width: 380px; /* Shrunk from 490px */
-  height: 380px;
+  width: 440px; /* Enlarged slightly from 380px */
+  height: 440px;
   background: linear-gradient(135deg, #f79c39 0%, #e08b30 100%);
   border-radius: 50%;
-  bottom: -120px; /* Lowered the circle further down */
+  bottom: -140px; /* Adjusted bottom to maintain relative position */
   left: 50%;
   transform: translateX(-40%);
   z-index: 1;
