@@ -153,9 +153,11 @@
 }
 
 .custom-avatar-img {
-  width: 100%;
+  width: 330%;
   height: auto;
-  max-height: 100%; /* Force image to never exceed the container's physical height */
+  max-width: none;
+  max-height: none;
+  flex-shrink: 0;
   object-fit: contain;
   object-position: bottom; 
   background-color: transparent;
@@ -163,7 +165,7 @@
   position: relative;
   z-index: 2;
   filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4)); 
-  transform: scale(3.0) translateY(18px) !important; /* Scaled up a bit more and adjusted translateY */
+  transform: translateY(50px) !important; /* Move down without scaling to keep it HD */
   transform-origin: bottom center;
 }
 
@@ -173,11 +175,11 @@
 
 .deco-circle-bg {
   position: absolute;
-  width: 440px; /* Enlarged slightly from 380px */
-  height: 440px;
+  width: 500px; /* Enlarged significantly from 440px */
+  height: 500px;
   background: linear-gradient(135deg, #f79c39 0%, #e08b30 100%);
   border-radius: 50%;
-  bottom: -140px; /* Adjusted bottom to maintain relative position */
+  bottom: -160px; /* Adjusted bottom to maintain relative position */
   left: 50%;
   transform: translateX(-40%);
   z-index: 1;
