@@ -15,7 +15,7 @@
   background-color: #121e31; /* dark blue */
   padding: 120px 0 0 0; /* Set precise top padding */
   position: relative;
-  overflow: visible !important; /* Changed from hidden to visible so the scaled image head doesn't get clipped */
+  overflow: hidden !important; /* Restored to clip the circle and photo exactly at the bottom of the blue section */
   align-items: stretch; /* Allow children to take full height */
   justify-content: center;
   display: flex;
@@ -163,7 +163,7 @@
   position: relative;
   z-index: 2;
   filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4)); 
-  transform: scale(1.15) translateY(0); /* Maintain scale and bottom alignment */
+  transform: scale(1.35) translateY(0); /* Scaled up to make the photo bigger */
   transform-origin: bottom center;
 }
 
