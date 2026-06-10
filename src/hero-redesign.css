@@ -163,7 +163,7 @@
   position: relative;
   z-index: 2;
   filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4)); 
-  transform: scale(1.6) translateY(0); /* Scaled up further to make the photo bigger */
+  transform: scale(1.8) translateY(0); /* Scaled up dramatically to make the photo bigger */
   transform-origin: bottom center;
 }
 
