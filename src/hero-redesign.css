@@ -19,7 +19,7 @@
   align-items: stretch; /* Allow children to take full height */
   justify-content: center;
   display: flex;
-  min-height: auto !important; /* Override 100vh from .hero */
+  min-height: 95vh !important; /* Changed from auto to 95vh so it doesn't clip the image */
 }
 
 .custom-hero .hero-grid {
@@ -155,7 +155,7 @@
 .custom-avatar-img {
   width: 100%;
   height: auto;
-  max-height: 85vh; 
+  max-height: 80vh; 
   object-fit: contain;
   object-position: bottom; 
   background-color: transparent;
@@ -163,7 +163,7 @@
   position: relative;
   z-index: 2;
   filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4)); 
-  transform: scale(1.15) translateY(10px); /* Reduced scale to make the photo smaller */
+  transform: scale(1); /* Removed scaling so it doesn't get cut off at the top */
   transform-origin: bottom center;
 }
 
