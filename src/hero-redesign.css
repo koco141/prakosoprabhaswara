@@ -153,7 +153,7 @@
 }
 
 .custom-avatar-img {
-  width: 330%;
+  width: 130%; /* Reduced from 330% to be reasonable */
   height: auto;
   max-width: none;
   max-height: none;
@@ -165,7 +165,7 @@
   position: relative;
   z-index: 2;
   filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4)); 
-  transform: translateY(50px) !important; /* Move down without scaling to keep it HD */
+  transform: translateY(20px) !important; /* Move down slightly to keep it stuck to the bottom */
   transform-origin: bottom center;
 }
 
