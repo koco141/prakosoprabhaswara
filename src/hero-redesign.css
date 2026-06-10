@@ -165,7 +165,7 @@
   position: relative;
   z-index: 2;
   filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4)); 
-  transform: translateY(20px) !important; /* Move down slightly to keep it stuck to the bottom */
+  transform: translateY(35px) !important; /* Move down further to stick it firmly to the bottom */
   transform-origin: bottom center;
 }
 

@@ -1848,7 +1848,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (cropperSaveBtn) {
         cropperSaveBtn.addEventListener('click', () => {
             const canvas = document.createElement('canvas');
-            const targetSize = 400; // Crisp output dimensions
+            const targetSize = 1600; // Increased to 1600 to ensure HD output
             canvas.width = targetSize;
             canvas.height = targetSize;
             const ctx = canvas.getContext('2d');
