@@ -155,7 +155,7 @@
 .custom-avatar-img {
   width: 100%;
   height: auto;
-  max-height: 90vh; 
+  max-height: 85vh; 
   object-fit: contain;
   object-position: bottom; 
   background-color: transparent;
@@ -163,7 +163,7 @@
   position: relative;
   z-index: 2;
   filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4)); 
-  transform: scale(1.45) translateY(20px); /* Increased scale to make the person even taller */
+  transform: scale(1.15) translateY(10px); /* Reduced scale to make the photo smaller */
   transform-origin: bottom center;
 }
 
