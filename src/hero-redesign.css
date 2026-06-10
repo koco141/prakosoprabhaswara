@@ -177,7 +177,7 @@
   height: 380px;
   background: linear-gradient(135deg, #f79c39 0%, #e08b30 100%);
   border-radius: 50%;
-  bottom: -50px; /* Adjusted cutoff since it is smaller */
+  bottom: -120px; /* Lowered the circle further down */
   left: 50%;
   transform: translateX(-40%);
   z-index: 1;
