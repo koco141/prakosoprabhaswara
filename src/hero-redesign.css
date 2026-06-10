@@ -19,7 +19,7 @@
   align-items: stretch; /* Allow children to take full height */
   justify-content: center;
   display: flex;
-  min-height: 95vh !important; /* Changed from auto to 95vh so it doesn't clip the image */
+  min-height: auto !important; /* Override 100vh from .hero */
 }
 
 .custom-hero .hero-grid {
@@ -163,7 +163,7 @@
   position: relative;
   z-index: 2;
   filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4)); 
-  transform: scale(1); /* Removed scaling so it doesn't get cut off at the top */
+  transform: scale(0.85) translateY(40px); /* Scaled down and moved down */
   transform-origin: bottom center;
 }
 
