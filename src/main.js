@@ -2,19 +2,39 @@ import { auth, db, provider, signInWithPopup, signOut, onAuthStateChanged, doc, 
 
 window.appData = {};
 
-const syncToFirebase = async () => {
-    try {
-        await setDoc(doc(db, 'portfolio', 'data'), window.appData);
-    } catch(e) {
-        console.error("Firebase sync error:", e);
-    }
+let syncTimeout = null;
+const syncToFirebase = (force = false) => {
+    return new Promise((resolve) => {
+        if (syncTimeout) clearTimeout(syncTimeout);
+        const executeSync = async () => {
+            try {
+                const cleanData = {};
+                for (let k in window.appData) {
+                    if (window.appData[k] !== undefined) {
+                        cleanData[k] = window.appData[k];
+                    }
+                }
+                await setDoc(doc(db, 'portfolio', 'data'), cleanData);
+                console.log("Firebase sync success");
+                resolve(true);
+            } catch(e) {
+                console.error("Firebase sync error:", e);
+                resolve(false);
+            }
+        };
+        if (force) {
+            executeSync();
+        } else {
+            syncTimeout = setTimeout(executeSync, 1500);
+        }
+    });
 };
 
 const appStore = {
     getItem: (key) => {
         if (key === 'portfolio_language') return localStorage.getItem(key);
         if (window.appData && window.appData[key] !== undefined) return window.appData[key];
-        return localStorage.getItem(key); // Fallback to local
+        return null;
     },
     setItem: (key, val) => {
         if (key === 'portfolio_language') {
@@ -1265,7 +1285,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
     
     // 5. Save Admin Changes (saves but keeps admin mode active)
-    const saveAdminChanges = () => {
+    const saveAdminChanges = async () => {
+        const saveBtn = document.getElementById('admin-save-btn');
+        let originalText = "Simpan Perubahan";
+        if (saveBtn) {
+            originalText = saveBtn.innerText;
+            saveBtn.innerText = "Menyimpan...";
+            saveBtn.disabled = true;
+        }
+
         // Intelligent formatting for tags before saving
         let rawTags = editableTags.innerText;
         let tagList = rawTags.replace(/·/g, ',').replace(/\./g, ',').split(',');
@@ -1348,8 +1376,15 @@ document.addEventListener('DOMContentLoaded', async () => {
             projects: getProjectsForLang(currentLang)
         };
 
+        await syncToFirebase(true);
+
         showToast(translations[currentLang].toast_saved);
         renderProjects();
+        
+        if (saveBtn) {
+            saveBtn.innerText = originalText;
+            saveBtn.disabled = false;
+        }
     };
 
     // 6. Undo Admin Changes (reverts UI and localStorage to backup state)
@@ -1498,7 +1533,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (editablePesertaNum) editablePesertaNum.contentEditable = "false";
         
         if (saveChanges) {
-            saveAdminChanges();
+            await saveAdminChanges();
         } else {
             // Restore from backup (discard unsaved changes since last save)
             editableTags.innerHTML = tempBackup.tags;
@@ -2412,7 +2447,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             // Admin color picker (palette swatches inline)
             let adminOverlayHtml = '';
             if (isAdminActive) {
-                const paletteColors = ['#0f2035','#0d2818','#1e1030','#2a0d1e','#0d1f2a','#201508','#0a1f20','#111828'];
+                const paletteColors = ['#2563eb','#7c3aed','#059669','#dc2626','#ea580c','#0891b2','#4f46e5','#db2777'];
                 const swatchesHtml = paletteColors.map(c =>
                     `<button class="card-palette-swatch${c === coverColor ? ' active' : ''}" data-color="${c}" style="background:${c};" onclick="event.stopPropagation()"></button>`
                 ).join('');
