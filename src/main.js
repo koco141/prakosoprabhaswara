@@ -822,17 +822,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const getProjectsForLang = (lang) => {
-        const langKey = getStorageKey('portfolio_dynamic_projects', lang);
-        let projectsRaw = appStore.getItem(langKey);
-        let projects = [];
-        if (projectsRaw !== null && projectsRaw.trim() !== '') {
-            projects = JSON.parse(projectsRaw);
-        } else {
-            let idProjectsRaw = appStore.getItem('portfolio_dynamic_projects');
-            if (idProjectsRaw !== null && idProjectsRaw.trim() !== '') {
-                projects = JSON.parse(idProjectsRaw);
-            } else {
-                projects = [
+        let projects = [
                     {
                         id: 'pintar-lms',
                         type: 'web',
@@ -904,10 +894,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         mobileScreenshot: ''
                     }
                 ];
-                appStore.setItem('portfolio_dynamic_projects', JSON.stringify(projects));
-            }
-        }
-        
         let migrated = false;
         projects.forEach(p => {
             if (!p.type) { p.type = 'web'; migrated = true; }
