@@ -568,14 +568,12 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease, filter 0.5s ease, opacity 0.5s ease;
-  filter: sepia(80%);
+  transition: transform 0.5s ease;
 }
 
 .event-photo-wrapper:hover .event-photo {
   transform: scale(1.1);
-  filter: sepia(0%);
-  opacity: 1;
+  opacity: 0.9;
 }
 
 .event-overlay {
