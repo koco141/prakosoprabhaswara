@@ -834,6 +834,16 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 projects = [
                     {
+                        id: 'pintar-lms',
+                        type: 'web',
+                        name: 'PINTAR LMS',
+                        keywords: 'LMS, Web Application, Frontend',
+                        coverColor: '#4f46e5',
+                        link: 'https://www.pintar.digital/',
+                        webScreenshot: './Asset Foto/pintar_web.png',
+                        mobileScreenshot: ''
+                    },
+                    {
                         id: 'default-1',
                         type: 'web',
                         name: 'Portal Citra Graha',
