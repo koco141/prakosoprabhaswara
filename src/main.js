@@ -1095,6 +1095,118 @@ document.addEventListener('DOMContentLoaded', () => {
         observeElements();
     };
 
+    function filterProjects(category) {
+        const cards = document.querySelectorAll('.portfolio-grid .portfolio-item');
+        cards.forEach(card => {
+            const projectType = card.getAttribute('data-type') || 'web';
+            if (category === 'all' || projectType === category) {
+                card.classList.remove('filtered-out');
+            } else {
+                card.classList.add('filtered-out');
+            }
+        });
+    }
+
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            e.target.classList.add('active');
+            filterProjects(e.target.getAttribute('data-filter'));
+        });
+    });
+
+    function renderProjects() {
+        const portfolioGrid = document.querySelector('.portfolio-grid');
+        if (!portfolioGrid) return;
+        
+        portfolioGrid.innerHTML = '';
+        const currentProjects = getProjectsForLang(currentLang);
+        
+        currentProjects.forEach(project => {
+            const card = document.createElement('div');
+            const typeClass = project.type === 'design' ? 'design-item' : 'web-item';
+            card.className = `portfolio-item portfolio-card-new glass ${typeClass}`;
+            card.setAttribute('data-id', project.id);
+            card.setAttribute('data-type', project.type || 'web');
+            
+            const isDesign = project.type === 'design';
+            const typeLabel = isDesign ? 'UI/UX Design' : 'Frontend Web Dev';
+            
+            const keywordsText = (project.keywords || '')
+                .split(',')
+                .map(k => k.trim())
+                .filter(k => k.length > 0)
+                .map(k => `<span class="proj-tag">#${k}</span>`)
+                .join('');
+                
+            const webSrc = project.webScreenshot || '';
+            const mobileSrc = project.mobileScreenshot || '';
+            const coverColor = project.coverColor || '#0f2035';
+            
+            let webLayerHtml = '';
+            if (webSrc) {
+                webLayerHtml = `
+                    <div class="proj-web-layer">
+                        <img src="${webSrc}" alt="${project.name} Web">
+                    </div>
+                `;
+            }
+            
+            let mobileLayerHtml = '';
+            if (mobileSrc) {
+                mobileLayerHtml = `
+                    <div class="proj-phone-layer">
+                        <div class="phone-frame">
+                            <div class="phone-notch"></div>
+                            <div class="phone-screen">
+                                <img src="${mobileSrc}" alt="${project.name} Mobile">
+                            </div>
+                            <div class="phone-home"></div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            let visitBtnHtml = '';
+            if (project.link) {
+                const btnLabel = isDesign 
+                    ? (translations[currentLang].nav_portfolio === '作品集' ? '打开原型 ↗' : (translations[currentLang].nav_portfolio === 'Portfolio' ? 'Open Prototype ↗' : 'Buka Prototipe ↗'))
+                    : (translations[currentLang].nav_portfolio === '作品集' ? '访问网站 ↗' : (translations[currentLang].nav_portfolio === 'Portfolio' ? 'Visit Site ↗' : 'Kunjungi Situs ↗'));
+                visitBtnHtml = `<a href="${project.link}" target="_blank" class="proj-visit-btn" onclick="event.stopPropagation()">${btnLabel}</a>`;
+            }
+
+            card.innerHTML = `
+                <div class="proj-cover" style="background-color: ${coverColor};">
+                    ${webLayerHtml}
+                    ${mobileLayerHtml}
+                </div>
+                <div class="proj-info">
+                    <div class="proj-info-left">
+                        <h3 class="proj-name">${project.name}</h3>
+                        <div class="proj-keywords">${keywordsText}</div>
+                    </div>
+                    <div class="proj-info-right">
+                        <span class="proj-type-badge ${typeClass}">${typeLabel}</span>
+                        ${visitBtnHtml}
+                    </div>
+                </div>
+            `;
+
+            card.addEventListener('click', () => openLightbox(project.id));
+            portfolioGrid.appendChild(card);
+            
+            if (typeof revealObserver !== 'undefined' && revealObserver.observe) {
+                revealObserver.observe(card);
+            }
+        });
+
+        const activeFilter = document.querySelector('.filter-btn.active');
+        if (activeFilter) {
+            filterProjects(activeFilter.getAttribute('data-filter'));
+        }
+    }
+
     applyLanguage(currentLang);
     
     // --- LIGHTBOX MODAL JS LOGIC ---
