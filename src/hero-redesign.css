@@ -153,7 +153,7 @@
 }
 
 .custom-avatar-img {
-  width: 130%; /* Reduced from 330% to be reasonable */
+  width: 180%; /* Increased width to make the photo larger */
   height: auto;
   max-width: none;
   max-height: none;
