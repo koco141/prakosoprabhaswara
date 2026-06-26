@@ -569,12 +569,12 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease, filter 0.5s ease, opacity 0.5s ease;
-  filter: grayscale(100%);
+  filter: sepia(80%);
 }
 
 .event-photo-wrapper:hover .event-photo {
   transform: scale(1.1);
-  filter: grayscale(0%);
+  filter: sepia(0%);
   opacity: 1;
 }
 
